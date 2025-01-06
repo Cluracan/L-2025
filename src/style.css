@@ -1,96 +1,640 @@
+@font-face {
+  font-family: myFont;
+  src: url("./fonts/ceefax.ttf");
+}
+@font-face {
+  font-family: calculatorFont;
+  src: url("./fonts/digital-7.ttf");
+}
+
+@font-face {
+  font-family: handwriting;
+  src: url(./fonts/ArchitectsDaughter-Regular.ttf);
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --story-text-color: white;
+  --font-size: 16px;
+  --pink: #ecb2ba;
+  --pink-dark: #c6939a;
+  --tape-gray: #dbd8be;
+  --tape-edge-gray: #b7b49d;
+  --transparent: rgba(255, 255, 255, 0);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  /*
+  font-family: myFont;
+  font-size: 17px;
+  */
 }
-a:hover {
-  color: #535bf2;
+
+html,
+body {
+  height: 100%;
 }
 
 body {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: myFont;
+  font-size: var(--font-size);
+}
+
+/*-------------------
+1. Intro page
+--------------------*/
+.book-container {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  height: 100%;
+  width: 60vw;
+  perspective: 2400px;
+  overflow: hidden;
+  font-size: 14px;
+  font-family: "Courier New", Courier, monospace;
+  color: black;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.options-container {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80vh;
+  width: 20vw;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.intro-option {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.5rem;
+  margin: 1.5rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.intro-option:hover {
+  font-size: 1.6rem;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.book {
+  display: flex;
+  margin: auto;
+  width: 25vw;
+  height: 70vh;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transition: translate 1s;
+  translate: calc(min(var(--current-index), 1) * 50%) 0%;
+}
+
+.page {
+  --thickness: 5;
+  flex: none;
+  display: flex;
+  width: 100%;
+  pointer-events: all;
+  user-select: none;
+  transform-style: preserve-3d;
+  border: 1px solid rgba(188, 188, 188, 0.533);
+  transform-origin: left center;
+  transition: transform 1s,
+    rotate 1s ease-in
+      calc(
+        (
+            min(var(--page-index), var(--current-index)) -
+              max(var(--page-index), var(--current-index))
+          ) * 50ms
+      );
+  translate: calc(var(--page-index) * -100%) 0px 0px;
+  transform: translateZ(
+    calc(
+      (var(--current-index) - var(--page-index) - 0.5) *
+        calc(var(--thickness) * 1px)
+    )
+  );
+  rotate: 0 1 0
+    calc(clamp(0, var(--current-index) - var(--page-index), 1) * -180deg);
+}
+
+.page img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.paper-scrap {
+  width: 240px;
+}
+
+.computer-image {
+  width: 240px;
+  align-self: center;
+}
+
+.new-game-question-holder {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  border-radius: 2px;
+  background-color: #e4e4e440;
+  border: 1px solid grey;
+}
+
+.new-game-question {
+  margin: 1rem 0rem;
+}
+
+.name-input {
+  width: 60%;
+  margin: 0.5rem;
+  height: 2rem;
+}
+
+.team-name-feedback {
+  color: red;
+  height: 4rem;
+  width: 80%;
+}
+
+.difficulty-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem;
+}
+
+.new-game-button {
+  padding: 0.5rem 1rem;
+  margin: 0 1rem;
+}
+
+.button-selected {
+  background-color: rgb(172, 228, 172);
+}
+
+.difficulty-feedback {
+  align-self: center;
+  width: 80%;
+  height: 3rem;
+  margin: 1rem;
+  padding: 0.2rem;
+}
+
+.start-button {
+  background-color: rgb(228, 226, 105);
+  align-self: center;
+  width: 40%;
+  height: 2.5rem;
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 1rem;
+}
+
+.start-button:hover {
+  height: 2.7rem;
+  margin: 0.9rem;
+  width: 41%;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex: none;
+  width: 100%;
+  padding: 2rem;
+  backface-visibility: hidden;
+  background-color: whitesmoke;
+  translate: 0px;
+}
+
+.back {
+  background-image: linear-gradient(to right, #f2f2f2 94%, #a1a1a1 100%);
+  translate: -100% 0;
+  rotate: 0 1 0 180deg;
+}
+
+/*---------------
+2. 
+---------------*/
+.container {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: var(--story-text-color);
+}
+
+.content-middle {
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-left {
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-canvas-container {
+  position: relative;
+}
+
+.canvas-map {
+  background: white;
+  border-radius: 2px;
+}
+
+.push-pin-left-container {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+}
+
+.push-pin-right-container {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+}
+
+.inventory-sheet {
+  display: flex;
+  flex-direction: column;
+  --paper-color: #d5e0f9;
+  --paper-dark: #c2d0ea;
+  --shadow-size: 3px;
+  --transparent: rgba(213, 224, 249, 0);
+  min-width: 20vh;
+}
+
+.inventory-header {
+  font-family: handwriting;
+  margin-top: 1.5rem;
+}
+
+.inventory-text {
+  font-family: handwriting;
+  line-height: 200%;
+  margin: 1rem;
+}
+
+.content-right {
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+
+.cheat-sheet {
+  --paper-color: var(--pink);
+  --paper-dark: var(--pink-dark);
+  --shadow-size: 1px;
+  --transparent: rgba(236, 178, 186, 0);
+}
+
+.cheat-sheet-info {
+  font-family: handwriting;
+  padding: 10px;
+  font: bold;
+}
+
+.paper {
+  position: relative;
+  background: linear-gradient(
+      to bottom right,
+      var(--paper-dark),
+      20%,
+      var(--transparent)
+    ),
+    var(--paper-color);
+  min-width: 250px;
+  min-height: 130px;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow-size) var(--shadow-size) 2px var(--paper-dark);
+  margin: auto;
+  margin-top: 50px;
+}
+
+.paper::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      var(--transparent),
+      50%,
+      var(--paper-dark),
+      51%,
+      var(--transparent)
+    ),
+    linear-gradient(
+      to right,
+      var(--transparent),
+      50%,
+      var(--paper-dark),
+      51%,
+      var(--transparent)
+    );
+}
+
+.top-tape {
+  position: absolute;
+  height: 4vmin;
+  top: -5px;
+  width: 110%;
+  background-color: var(--tape-gray);
+  border-right: 1px dotted var(--tape-edge-gray);
+  border-left: 1px dotted var(--tape-edge-gray);
+  opacity: 0.5;
+}
+
+.tape-section {
+  position: absolute;
+  width: 100%;
+}
+
+.tape-section:first-of-type {
+  top: 0;
+}
+
+.tape-section:last-of-type {
+  bottom: 0;
+}
+
+.tape-section::before,
+.tape-section::after {
+  content: "";
+  width: 10vmin;
+  height: 4vmin;
+  position: absolute;
+  background-color: var(--tape-gray);
+  opacity: 0.5;
+  border-right: 1px dotted var(--tape-edge-gray);
+  border-left: 1px dotted var(--tape-edge-gray);
+}
+
+.tape-section:last-of-type::after {
+  transform: rotate(-45deg);
+  right: -4vmin;
+  top: -3vmin;
+}
+
+.tape-section:first-of-type::before {
+  transform: rotate(-45deg);
+  left: -4vmin;
+}
+
+.tape-section:first-of-type::after {
+  transform: rotate(45deg);
+  right: -4vmin;
+  top: 0;
+}
+
+.tape-section:last-of-type::before {
+  transform: rotate(45deg);
+  left: -4vmin;
+  bottom: 0;
+}
+
+.story-display-container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.user-input-container {
+  padding: 20px 0;
+  display: flex;
+}
+
+.user-input {
+  width: 100%;
+  margin-left: 20px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--story-text-color);
+  font-family: myFont;
+  font-size: var(--font-size);
+}
+
+.user-text-container {
+  display: flex;
+}
+
+.user-text {
+  color: yellow;
+  margin-left: 15px;
+}
+
+.story-text-element {
+  margin: 8px 0;
+  white-space: pre-wrap;
+}
+
+/*
+.loading-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.image {
+  width: 100%;
+}
+*/
+.puzzle-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lights-canvas-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.puzzle-line-container {
+  overflow-y: hidden;
+}
+
+/* KEY PUZZLE */
+.key-blank-container,
+.key-holes-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.key-blank-text,
+.key-holes-text {
+  color: green;
+  margin: 64px;
+  width: 64px;
+}
+
+.key-blank-grid,
+.key-holes-grid {
+  display: grid;
+  gap: 0px;
+}
+
+.key-holes-grid {
+  background-color: white;
+  padding: 12px 24px;
+  margin-right: 64px;
+}
+
+.key-cell {
+  min-width: 24px; /* CHANGE THIS TO REM OR PROPORTION OF SCREEN HEIGHT? */
+  aspect-ratio: 1/1;
+}
+
+.instructions {
+  max-width: 650px;
+  align-self: center;
+}
+
+/* TREE PUZZLE*/
+.orchard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.orchard-grid {
+  display: grid;
+  gap: 1px;
+  background-color: rgb(87, 125, 61);
+}
+
+.tree-cell {
+  margin: 0px;
+  width: 64px;
+  aspect-ratio: 1/1;
+  display: flex;
+  background-color: rgb(116, 188, 67);
+}
+
+.tree-image {
+  margin: 8px;
+}
+
+/* CALCULATOR PUZZLE */
+
+.calculator-container {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding: 12px;
+  border-radius: 5px;
+  background-color: rgb(251, 241, 122);
+  box-shadow: inset 1px -1px 4px 1px rgba(107, 102, 31, 0.82);
+  align-self: center;
+}
+
+.calculator-inner-container {
+  border-radius: 3px;
+  background-color: rgb(251, 241, 122);
+  padding: 5px;
+}
+.calculator-display {
+  font-family: calculatorFont;
+  font-size: xx-large;
+  color: rgb(60, 60, 60);
+  height: 3rem;
+  text-align: right;
+  line-height: 3rem;
+  padding-right: 1rem;
+  border-radius: 10px;
+  box-shadow: inset -5px -5px 67px -35px #2b382e;
+  background-color: rgb(189, 212, 189);
+  padding: 5px 10px;
+}
+
+.calculator-text {
+  font-size: small;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: rgb(32, 32, 23);
+  padding: 10px;
+}
+
+.calculator-buttons-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px 12px;
+  background-color: rgb(251, 241, 122);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 5px;
+}
+.calculator-button {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border: 3px solid rgb(47, 47, 47);
+  border-radius: 5px;
+  background-color: rgb(60, 60, 60);
+  color: ivory;
+  box-shadow: inset 0px 0px 3px 0px #bdbdba;
+  padding-bottom: 4px;
+}
+
+.calculator-button:hover {
+  background-color: rgb(81, 81, 81);
+  transform: scale(1.02);
+}
+
+/* PIG PUZZLE*/
+.pig-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pig-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background-color: rgb(116, 116, 116);
+}
+
+.pig-cell {
+  margin: 0px;
+  width: 64px;
+  aspect-ratio: 1/1;
+  display: flex;
+  background-color: rgb(150, 216, 110);
+}
+
+.pig-image {
+  margin: 8px;
+}
+
+/* SNOOKER PUZZLE */
+.snooker-canvas {
+  background-color: white;
 }
