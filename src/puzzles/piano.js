@@ -2,7 +2,7 @@ import { createUserElement, createStoryElement, createDiv } from "../utils";
 
 const myAudio = [];
 for (let i = 0; i < 7; i++) {
-  myAudio[i] = new Audio(`../sounds/note${i}.mp3`);
+  myAudio[i] = new Audio(`./sounds/note${i}.mp3`);
 }
 
 const audioDictionary = {
