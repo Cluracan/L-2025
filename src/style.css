@@ -14,22 +14,24 @@
 
 :root {
   --story-text-color: white;
-  --font-size: 16px;
   --pink: #ecb2ba;
   --pink-dark: #c6939a;
   --tape-gray: #dbd8be;
   --tape-edge-gray: #b7b49d;
   --transparent: rgba(255, 255, 255, 0);
+  font-size: 16px;
+}
+
+@media (max-width: 1430px) {
+  :root {
+    font-size: 14px;
+  }
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  /*
-  font-family: myFont;
-  font-size: 17px;
-  */
 }
 
 html,
@@ -45,7 +47,6 @@ body {
   margin: 0;
   white-space: pre-wrap;
   font-family: myFont;
-  font-size: var(--font-size);
 }
 
 /*-------------------
@@ -58,7 +59,7 @@ body {
   width: 60vw;
   perspective: 2400px;
   overflow: hidden;
-  font-size: 14px;
+  font-size: 0.9rem;
   font-family: "Courier New", Courier, monospace;
   color: black;
 }
@@ -161,7 +162,6 @@ body {
 
 .team-name-feedback {
   color: red;
-  height: 4rem;
   width: 80%;
 }
 
@@ -183,7 +183,7 @@ body {
 .difficulty-feedback {
   align-self: center;
   width: 80%;
-  height: 3rem;
+
   margin: 1rem;
   padding: 0.2rem;
 }

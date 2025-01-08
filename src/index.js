@@ -109,6 +109,8 @@ const generateLoadingScreen = () => {
   titlePage.appendChild(titleFront);
 
   const titleBack = createDiv("back");
+  const teamNameFeedback = createDiv("team-name-feedback");
+  titleBack.appendChild(teamNameFeedback);
   titlePage.appendChild(titleBack);
   /*---------------
     New Game Page
@@ -130,8 +132,6 @@ const generateLoadingScreen = () => {
     (e) => (teamNameFeedback.textContent = "")
   );
   teamNameHolder.appendChild(teamNameInput);
-  const teamNameFeedback = createDiv("team-name-feedback");
-  teamNameHolder.appendChild(teamNameFeedback);
   newGameFront.appendChild(teamNameHolder);
 
   const difficultyHolder = createDiv("new-game-question-holder");
@@ -177,7 +177,7 @@ const generateLoadingScreen = () => {
     );
     if (teamNameHasForbiddenCharacters) {
       teamNameFeedback.textContent =
-        "Please only use alphanumeric characters in your team name...";
+        "Please just use alphanumeric characters in your team name\n (it helps with the save file!)";
       return;
     }
     await sleep(1000);
