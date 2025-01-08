@@ -19,14 +19,16 @@
   --tape-gray: #dbd8be;
   --tape-edge-gray: #b7b49d;
   --transparent: rgba(255, 255, 255, 0);
-  --pig-cell-width:64px
+  --pig-cell-width: 64px;
+  --tree-cell-width: 64px;
   font-size: 16px;
 }
 
 @media (max-width: 1430px) {
   :root {
     font-size: 14px;
-    --pig-cell-width:52px
+    --pig-cell-width: 52px;
+    --tree-cell-width: 52px;
   }
 }
 
@@ -536,7 +538,7 @@ body {
 
 .tree-cell {
   margin: 0px;
-  width: 64px;
+  width: var(--tree-cell-width);
   aspect-ratio: 1/1;
   display: flex;
   background-color: rgb(116, 188, 67);
