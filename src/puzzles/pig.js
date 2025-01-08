@@ -90,7 +90,7 @@ export class PigPuzzle {
     ];
     this.introTextBottom =
       // "You can move using arrow keys / U,D,L,R, or LEAVE at any time.";
-      "You can move using the arrow keys, or by typing UP, DOWN, LEFT or RIGHT (U, D, L, R).  You can LEAVE at any time.";
+      "You can move using the ARROW keys, or by typing UP, DOWN, LEFT or RIGHT (U, D, L, R).  You can LEAVE at any time.";
     this.startQuestion = "Do you want to move first?";
     this.startQuestionAnswered = false;
     this.completed = false;

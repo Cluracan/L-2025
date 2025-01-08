@@ -43,7 +43,7 @@ export class TreePuzzle {
     this.id = "tree";
     this.gameScreenElements;
     this.puzzleLine = [];
-    this.puzzleText = `"Right," says the gardener. "Use the arrow keys to move me about, and 'T' when you want me to plant a tree or remove one. Or just use the letters U, D, L, R, and T."\n\n"Type CHECK if you think you have finished, RESET if you want me to start from scratch, or LEAVE if you want a break.`;
+    this.puzzleText = `"Right," says the gardener. "Use the ARROW keys to move me about, and 'T' when you want me to plant a tree or remove one. Or just use the letters U, D, L, R, and T."\n\n"Type CHECK if you think you have finished, RESET if you want me to start from scratch, or LEAVE if you want a break.`;
     this.completed = false;
     this.gardenerIndex = 12;
     this.orchardCells = Array.from({ length: 25 }, (v, i) => false);
