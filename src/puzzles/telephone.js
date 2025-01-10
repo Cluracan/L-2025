@@ -11,15 +11,15 @@ const responseList = {
   5: `It's a recording of motoring information. The fine weather is causing jams.`,
   8: `It's a recording of a bedtime story--something dull about a thirteenth century Italian.`,
   13: `The recorded gardening information tells you it's a good time to plant sunflowers.`,
-  21: `It's an answering machine for a Chinese laundry. You don't bother leaving a message.`,
+  21: `It's an answering machine for a Pizza restaurant. You don't bother leaving a message.`,
   34: `A recording tells you "What's on in Loughborough." It doesn't last long.`,
   55: `A voice says "Look, I told you not to ring me at work," and hangs up.`,
   89: `It's the financial news. Apparently an improvement in the economy is expected soon.`,
   144: `It's the cricket. England are 132 for six.`,
   233: `The recipe of the day sounds revolting. Anyway, you are not hungry.`,
   377: `It's the skiing information. There isn't a lot of snow about.`,
-  610: `The engaged tone tells you the line is in use.`,
-  987: `An irate voice says "You really have gone too far this time," and slams the phone down.`,
+  610: `You hear a recorded message saying, "The line is busy, please try again later."`,
+  987: `An irate voice says "You really have gone too far this time!", and slams the phone down.`,
 };
 
 export class TelephonePuzzle {
